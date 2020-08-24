@@ -7,7 +7,7 @@ service = build('youtube', 'v3', developerKey=api_key)
 
 channels_request = service.channels().list(
     part='id, contentDetails',
-    id=config('BUKEDDE_CHANNEL_ID')
+    forUsername=config('BUKEDDE_TV_CHANNEL_NAME')
 )
 
 video_list = []
