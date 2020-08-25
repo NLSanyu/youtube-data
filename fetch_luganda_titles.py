@@ -16,8 +16,8 @@ channels_response = channels_request.execute()
 for channel in channels_response['items']:
     uploads_list_id = channel['contentDetails']['relatedPlaylists']['uploads']
 
-    next_page_token = None
-    while next_page_token != '':
+    next_page_token = ''
+    while next_page_token is not None:
         playlistitems_response = service.playlistItems().list(
             playlistId=uploads_list_id,
             part='snippet',
@@ -31,7 +31,7 @@ for channel in channels_response['items']:
             print(f'{title}, {video_id}')
             video_list.append({'video_id': video_id, 'title': title})
 
-        next_page_token = playlistitems_response['nextPageToken']
+        next_page_token = playlistitems_response.get('nextPageToken')
 
 with open('bukedde_video_titles.csv', mode='w') as csv_file:
     fieldnames = ['video_id', 'title']

@@ -15,8 +15,8 @@ channels_response = channels_request.execute()
 for channel in channels_response['items']:
     uploads_list_id = channel['contentDetails']['relatedPlaylists']['uploads']
 
-    next_page_token = None
-    while next_page_token != '':
+    next_page_token = ''
+    while next_page_token is not None:
         playlistitems_response = service.playlistItems().list(
             playlistId=uploads_list_id,
             part='snippet',
@@ -30,7 +30,7 @@ for channel in channels_response['items']:
             print(f'{title}, {video_id}')
             video_ids.append({'title': title, 'video_id': video_id})
 
-        # next_page_token = playlistitems_response['nextPageToken']
+        # next_page_token = playlistitems_response.get('nextPageToken')
         next_page_token = ''   # replace with above line after testing
 
 sample_video_id = video_ids[0]['video_id']
