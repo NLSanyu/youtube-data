@@ -1,8 +1,24 @@
 from decouple import config
+from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 
+CLIENT_SECRETS_FILE = 'client_secret.json'
+SCOPES = [
+    'https://www.googleapis.com/auth/youtube',
+    'https://www.googleapis.com/auth/youtube.force-ssl'
+]
+
+flow = InstalledAppFlow.from_client_secrets_file(
+    CLIENT_SECRETS_FILE,
+    SCOPES
+)
+
+credentials = flow.run_console()
+
+API_SERVICE_NAME = 'youtube'
+API_VERSION = 'v3'
 api_key = config('API_KEY')
-service = build('youtube', 'v3', developerKey=api_key)
+service = build(API_SERVICE_NAME, API_VERSION, developerKey=api_key)
 
 channels_request = service.channels().list(
     part='id, contentDetails',

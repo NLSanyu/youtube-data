@@ -37,5 +37,8 @@ ENV/
 # Local History for Visual Studio Code
 .history/
 
-#csv files
+# csv files
 *.csv
+
+# client auth files
+client_secret.json
