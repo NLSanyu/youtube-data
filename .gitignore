@@ -42,3 +42,4 @@ ENV/
 
 # client auth files
 client_secret.json
+speech_to_text_credentials.json
