@@ -48,19 +48,3 @@ for channel in channels_response['items']:
 
         # next_page_token = playlistitems_response.get('nextPageToken')
         next_page_token = ''   # replace with above line after testing
-
-sample_video_id = video_ids[0]['video_id']
-captions_request = service.captions().list(
-    part='id, snippet',
-    videoId=sample_video_id
-)
-captions_response = captions_request.execute()
-print(captions_response)
-
-# for caption in captions_response['items']:
-#     caption_id = caption['id']
-#     caption_download = service.captions().download(
-#         id=caption_id
-#     ).execute()
-
-#     print(caption_download)
