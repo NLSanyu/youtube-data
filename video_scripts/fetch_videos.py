@@ -7,9 +7,12 @@ API_VERSION = 'v3'
 api_key = config('API_KEY')
 service = build(API_SERVICE_NAME, API_VERSION, developerKey=api_key)
 
+with open("data/channels.json", "r") as read_file:
+    channels = json.load(read_file)
+
 channels_request = service.channels().list(
     part='id, contentDetails',
-    forUsername='ntvuganda'
+    forUsername=channels[0]['channelUsername']  # change this into loop
 )
 
 video_list = []
