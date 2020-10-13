@@ -17,6 +17,7 @@ def get_channels_from_file():
     with open("data/channels.json", "r") as read_file:
         channels = json.load(read_file)
 
+    print(channels)
     return channels
 
 
