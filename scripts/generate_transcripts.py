@@ -1,5 +1,4 @@
 import json
-# import fetch_videos
 from youtube_transcript_api import YouTubeTranscriptApi
 
 
@@ -20,7 +19,6 @@ def transcribe(video_ids):
 
 
 if __name__ == '__main__':
-    # fetch_videos
     with open("data/videos.json", "r") as read_file:
         videos = json.load(read_file)
     transcribe(videos)
