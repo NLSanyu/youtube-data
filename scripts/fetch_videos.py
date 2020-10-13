@@ -9,6 +9,11 @@ service = build(API_SERVICE_NAME, API_VERSION, developerKey=api_key)
 
 
 def get_channels_from_file():
+    """
+        Retrieves channel names of the channels 
+        whose video transcripts we want to fetch,
+        from the channels.json file
+    """
     with open("data/channels.json", "r") as read_file:
         channels = json.load(read_file)
 
@@ -16,6 +21,11 @@ def get_channels_from_file():
 
 
 def fetch_videos():
+    """
+        Fetches the video title and video id
+        of each video uploaded by the channels
+        in our channels.json file
+    """
     channels = get_channels_from_file()
 
     channels_request = service.channels().list(
@@ -44,8 +54,7 @@ def fetch_videos():
                 print(f'{title}, {video_id}')
                 video_list.append({'title': title, 'video_id': video_id})
 
-            # next_page_token = playlistitems_response.get('nextPageToken')
-            next_page_token = None   # replace with above line after testing
+            next_page_token = playlistitems_response.get('nextPageToken')
 
     return video_list
 

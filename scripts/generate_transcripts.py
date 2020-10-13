@@ -2,23 +2,33 @@ import json
 from youtube_transcript_api import YouTubeTranscriptApi
 
 
-def transcribe(video_ids):
-    transcript_list = []
+def get_transcripts(videos):
+    """
+        Fetches the transcripts of each video 
+        in the videos.json file
+    """
     for video in videos:
+        transcript_list = []
         try:
             transcript = YouTubeTranscriptApi.get_transcript(video['video_id'])
             transcript_list.append(transcript)
             print(transcript)
-        except RuntimeError as error:
-            print(error)
-        finally:
-            print('Transcript error')
+        except Exception:
+            pass
 
+    create_transcripts_file(transcript_list)
+
+def create_transcripts_file(transcript_list):
+    """
+        Creates a transcripts.json file (in the /data folder) 
+        from the transcript_list array.
+    """
     with open("data/transcripts.json", "w") as outfile:
         json.dump(transcript_list, outfile)
+
 
 
 if __name__ == '__main__':
     with open("data/videos.json", "r") as read_file:
         videos = json.load(read_file)
-    transcribe(videos)
+    get_transcripts(videos[:5]) # sample of first 5 videos
