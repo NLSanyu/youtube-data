@@ -7,12 +7,13 @@ def get_transcripts(videos):
         Fetches the transcripts of each video 
         in the videos.json file
     """
+    transcript_list = []
     for video in videos:
-        transcript_list = []
         try:
             transcript = YouTubeTranscriptApi.get_transcript(video['video_id'])
+            transcript.append({'title': video['title']})
             transcript_list.append(transcript)
-            print(transcript)
+            print(transcript)            
         except Exception:
             pass
 
